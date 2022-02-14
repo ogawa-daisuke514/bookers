@@ -20,5 +20,30 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  margin: 33p;
+  margin: 33px;
+}
+
+p {
+  margin: 33px;
+}
+
+#notice{
+  color: green;
+}
+
+.new-book-form{
+  margin-top: 18px;
+}
+
+strong{
+  font-weight: bold;
+}
+
+a {
+  text-decoration: underline;
+  color: #333;
+}
+a:hover {
+  background-color: #000;
+  color: #fff;
 }
