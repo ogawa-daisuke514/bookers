@@ -29,12 +29,38 @@
     <% end %>
   </tbody>
 </table>
+
 <h2>New Book</h2>
 <%= form_with model: @book, url: books_path, method: :post, local: true do |f| %>
-  <div class="new-book-form">Title</div>
-  <%= f.text_field :title %>
-  <div class="new-book-form">Body</div>
-  <%= f.text_area :body %>
+  <% err_n =  @book.errors.count %>
+  <% if err_n > 0 %>
+    <div id="error_explanation">
+      <h2><%= (err_n > 1 ? err_n.to_s + " errors" : "An error") %> occured when saving: </h2>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <% if err_n > 0 && @book.title.blank? %>
+  <div class="error-field">
+  <% else %>
+  <div class="field">
+  <% end %>
+    <div class="new-book-form">Title</div>
+    <%= f.text_field :title %>
+  </div>
+  
+  <% if err_n > 0 && @book.body.blank? %>
+  <div class="error-field">
+  <% else %>
+  <div class="field">
+  <% end %>
+    <div class="new-book-form">Body</div>
+    <%= f.text_area :body %>
+  </div>
   <div class="submit-button">
     <%= f.submit "Create Book" %>
   </div>

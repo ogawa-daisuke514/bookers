@@ -1,2 +1,41 @@
-<h1>Books#edit</h1>
-<p>Find me in app/views/books/edit.html.erb</p>
+<h2>Edit Book</h2>
+<%= form_with model: @book, url: book_path(@book.id), method: :patch, local: true do |f| %>
+  <% err_n =  @book.errors.count %>
+  <% if err_n > 0 %>
+    <div id="error_explanation">
+      <h2><%= (err_n > 1 ? err_n.to_s + " errors" : "An error") %> occured when saving: </h2>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if err_n > 0 && @book.title.blank? %>
+  <div class="error-field">
+  <% else %>
+  <div class="field">
+  <% end %>
+    <div class="new-book-form">Title</div>
+    <%= f.text_field :title %>
+  </div>
+
+  <% if err_n > 0 && @book.body.blank? %>
+  <div class="error-field">
+  <% else %>
+  <div class="field">
+  <% end %>
+    <div class="new-book-form">Body</div>
+    <%= f.text_area :body %>
+  </div>
+  <div class="submit-button">
+    <%= f.submit "Update Book" %>
+  </div>
+<% end %>
+
+
+<%= link_to "Show", book_path(@book.id) %> |
+<%= link_to "Delete", book_path(@book.id), method: :delete, "data-confirm" => "Are you sure to delete [#{@book.title}]?" %> |
+<%= link_to "Back", books_path %>
+
