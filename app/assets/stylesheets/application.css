@@ -65,3 +65,7 @@ a:hover {
   display: table;
   background-color: red;
 }
+
+.no-entry{
+  color: #bbb;
+}

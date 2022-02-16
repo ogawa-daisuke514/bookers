@@ -3,7 +3,7 @@
   <% err_n =  @book.errors.count %>
   <% if err_n > 0 %>
     <div id="error_explanation">
-      <h2><%= (err_n > 1 ? err_n.to_s + " errors" : "An error") %> occured when saving: </h2>
+      <h2><%= (err_n > 1 ? err_n.to_s + " errors" : "An error") %> occured when updating: </h2>
       <ul>
         <% @book.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -34,8 +34,9 @@
   </div>
 <% end %>
 
+<br>
 
 <%= link_to "Show", book_path(@book.id) %> |
-<%= link_to "Delete", book_path(@book.id), method: :delete, "data-confirm" => "Are you sure to delete [#{@book.title}]?" %> |
-<%= link_to "Back", books_path %>
+<%= link_to "Back", books_path %> |
+<%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "Are you sure to delete [#{@book.title}]?" %>
 

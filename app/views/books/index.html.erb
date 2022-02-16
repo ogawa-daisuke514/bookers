@@ -24,11 +24,15 @@
         <td><%= book.body %></td>
         <td><%= link_to "Show", book_path(book.id), method: :get %></td>
         <td><%= link_to "Edit", edit_book_path(book.id), method: :get %></td>
-        <td><%= link_to "Delete", book_path(book.id), method: :delete, "data-confirm" => "Are you sure to delete [#{book.title}]?" %></td>
+        <td><%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure to delete [#{book.title}]?" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<% if @books.size == 0 %>
+<div class="no-entry">(There is no entry. Would you create first one?)</div>
+<% end %>
 
 <h2>New Book</h2>
 <%= form_with model: @book, url: books_path, method: :post, local: true do |f| %>
@@ -43,7 +47,7 @@
       </ul>
     </div>
   <% end %>
-  
+
   <% if err_n > 0 && @book.title.blank? %>
   <div class="error-field">
   <% else %>
@@ -52,7 +56,7 @@
     <div class="new-book-form">Title</div>
     <%= f.text_field :title %>
   </div>
-  
+
   <% if err_n > 0 && @book.body.blank? %>
   <div class="error-field">
   <% else %>
